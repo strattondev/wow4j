@@ -17,6 +17,7 @@ public class Request {
     private String generatedUrl;
     private boolean apiKey;
     private boolean locale;
+    private RequestType requestType;
 
     public Request(RequestType requestType, Map<RequestParams, String> requiredParams, Map<String, String> optionalParams) {
         if (requestType == null) {
@@ -39,6 +40,7 @@ public class Request {
 
         this.apiKey = false;
         this.locale = false;
+        this.requestType = requestType;
 
         ST st = new ST(requestType.getDir());
 
@@ -79,5 +81,9 @@ public class Request {
 
     public boolean hasLocale() {
         return locale;
+    }
+
+    public RequestType getRequestType() {
+        return requestType;
     }
 }

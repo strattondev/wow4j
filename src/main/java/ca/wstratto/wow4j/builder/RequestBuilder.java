@@ -72,7 +72,12 @@ public class RequestBuilder {
             this.optionalParamValues = new HashMap<>();
         }
 
+        if (this.optionalParamValues.containsKey(key)) {
+            value = this.optionalParamValues.get(key) + "," + value;
+        }
+
         this.optionalParamValues.put(key, value);
+
         return this;
     }
 }
