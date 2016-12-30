@@ -1,13 +1,14 @@
 package ca.wstratto.wow4j.constants;
 
 import ca.wstratto.wow4j.response.CharacterProfile;
+import ca.wstratto.wow4j.response.RealmLeaderboard;
 
 import java.util.Arrays;
 import java.util.List;
 
 public enum RequestType {
     CHARACTER("wow/character/<realm>/<characterName>", CharacterProfile.class, RequestParams.REALM, RequestParams.CHARACTER_NAME),
-    CHALLENGE_MODE_REALM_LEADERBOARD("wow/challenge/<realm>", CharacterProfile.class, RequestParams.REALM);
+    CHALLENGE_MODE_REALM_LEADERBOARD("wow/challenge/<realm>", RealmLeaderboard.class, RequestParams.REALM);
 
     private String dir;
     private Class responseType;
