@@ -2,7 +2,8 @@ package ca.wstratto.wow4j.constants;
 
 public enum RequestParams {
     REALM("realm"),
-    CHARACTER_NAME("characterName");
+    CHARACTER_NAME("characterName"),
+    ID("id");
 
     private String templateKey;
 
