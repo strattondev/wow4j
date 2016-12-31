@@ -6,6 +6,10 @@ import ca.wstratto.wow4j.response.BossMasterList;
 import ca.wstratto.wow4j.response.CharacterProfile;
 import ca.wstratto.wow4j.response.GuildProfile;
 import ca.wstratto.wow4j.response.MountMasterList;
+import ca.wstratto.wow4j.response.PetAbility;
+import ca.wstratto.wow4j.response.PetMasterList;
+import ca.wstratto.wow4j.response.PetSpecies;
+import ca.wstratto.wow4j.response.PetStats;
 import ca.wstratto.wow4j.response.RealmLeaderboard;
 
 import java.util.Arrays;
@@ -18,7 +22,11 @@ public enum RequestType {
     BOSS("wow/boss/<id>", Boss.class, RequestParams.ID),
     BOSS_MASTER_LIST("wow/boss/", BossMasterList.class),
     GUILD("wow/guild/<realm>/<guildName>", GuildProfile.class, RequestParams.REALM, RequestParams.GUILD_NAME),
-    MOUNT_MASTER_LIST("wow/mount/", MountMasterList.class);
+    MOUNT_MASTER_LIST("wow/mount/", MountMasterList.class),
+    PET_MASTER_LIST("wow/pet/", PetMasterList.class),
+    PET_SPECIES("wow/pet/species/<id>", PetSpecies.class, RequestParams.ID),
+    PET_ABILITY("wow/pet/ability/<id>", PetAbility.class, RequestParams.ID),
+    PET_STATS("wow/pet/stats/<id>", PetStats.class, RequestParams.ID);
 
     private String dir;
     private Class responseType;
