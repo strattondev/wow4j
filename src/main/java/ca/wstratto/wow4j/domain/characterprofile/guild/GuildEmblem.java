@@ -9,4 +9,5 @@ public class GuildEmblem {
     private String iconColor;
     private String borderColor;
     private String backgroundColor;
+    private GuildEmblem emblem;
 }

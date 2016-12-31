@@ -4,6 +4,7 @@ import ca.wstratto.wow4j.response.Achievement;
 import ca.wstratto.wow4j.response.Boss;
 import ca.wstratto.wow4j.response.BossMasterList;
 import ca.wstratto.wow4j.response.CharacterProfile;
+import ca.wstratto.wow4j.response.GuildProfile;
 import ca.wstratto.wow4j.response.RealmLeaderboard;
 
 import java.util.Arrays;
@@ -14,7 +15,8 @@ public enum RequestType {
     CHALLENGE_MODE_REALM_LEADERBOARD("wow/challenge/<realm>", RealmLeaderboard.class, RequestParams.REALM),
     ACHIEVEMENT("wow/achievement/<id>", Achievement.class, RequestParams.ID),
     BOSS("wow/boss/<id>", Boss.class, RequestParams.ID),
-    BOSS_MASTER_LIST("wow/boss/", BossMasterList.class);
+    BOSS_MASTER_LIST("wow/boss/", BossMasterList.class),
+    GUILD("wow/guild/<realm>/<guildName>", GuildProfile.class, RequestParams.REALM, RequestParams.GUILD_NAME);
 
     private String dir;
     private Class responseType;
