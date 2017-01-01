@@ -4,7 +4,8 @@ public enum RequestParams {
     REALM("realm"),
     CHARACTER_NAME("characterName"),
     ID("id"),
-    GUILD_NAME("guildName");
+    GUILD_NAME("guildName"),
+    BRACKET("bracket");
 
     private String templateKey;
 

@@ -5,6 +5,7 @@ import ca.wstratto.wow4j.response.Boss;
 import ca.wstratto.wow4j.response.BossMasterList;
 import ca.wstratto.wow4j.response.CharacterProfile;
 import ca.wstratto.wow4j.response.GuildProfile;
+import ca.wstratto.wow4j.response.Leaderboard;
 import ca.wstratto.wow4j.response.MountMasterList;
 import ca.wstratto.wow4j.response.PetAbility;
 import ca.wstratto.wow4j.response.PetMasterList;
@@ -26,7 +27,8 @@ public enum RequestType {
     PET_MASTER_LIST("wow/pet/", PetMasterList.class),
     PET_SPECIES("wow/pet/species/<id>", PetSpecies.class, RequestParams.ID),
     PET_ABILITY("wow/pet/ability/<id>", PetAbility.class, RequestParams.ID),
-    PET_STATS("wow/pet/stats/<id>", PetStats.class, RequestParams.ID);
+    PET_STATS("wow/pet/stats/<id>", PetStats.class, RequestParams.ID),
+    LEADERBOARD("wow/leaderboard/<bracket>", Leaderboard.class, RequestParams.BRACKET);
 
     private String dir;
     private Class responseType;
