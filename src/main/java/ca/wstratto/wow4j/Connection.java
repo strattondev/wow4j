@@ -36,17 +36,9 @@ public class Connection {
             throw new IllegalArgumentException("region cannot be null or empty");
         }
 
-        if (locale == null) {
-            locale = Locale.EN_US;
-        }
-
         String hashKey = apiKey + region.getRegion();
 
-        if (!CONNECTION_INSTANCES.containsKey(hashKey)) {
-            CONNECTION_INSTANCES.put(hashKey, new Connection(apiKey, region, locale));
-        }
-
-        return CONNECTION_INSTANCES.get(hashKey);
+        return CONNECTION_INSTANCES.computeIfAbsent(hashKey, key -> new Connection(apiKey, region, locale == null ? Locale.EN_US : locale));
     }
 
     public static synchronized void flushConnections() {
