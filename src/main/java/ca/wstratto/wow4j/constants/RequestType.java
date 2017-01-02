@@ -15,6 +15,7 @@ import ca.wstratto.wow4j.response.Quest;
 import ca.wstratto.wow4j.response.RealmLeaderboard;
 import ca.wstratto.wow4j.response.RealmStatus;
 import ca.wstratto.wow4j.response.Recipe;
+import ca.wstratto.wow4j.response.Spell;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +35,8 @@ public enum RequestType {
     LEADERBOARD("wow/leaderboard/<bracket>", Leaderboard.class, RequestParams.BRACKET),
     QUEST("wow/quest/<id>", Quest.class, RequestParams.ID),
     REALM_STATUS("wow/realm/status", RealmStatus.class),
-    RECIPE("wow/recipe/<id>", Recipe.class, RequestParams.ID);
+    RECIPE("wow/recipe/<id>", Recipe.class, RequestParams.ID),
+    SPELL("wow/spell/<id>", Spell.class, RequestParams.ID);
 
     private String dir;
     private Class responseType;
