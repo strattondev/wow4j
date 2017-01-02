@@ -13,6 +13,7 @@ import ca.wstratto.wow4j.response.PetSpecies;
 import ca.wstratto.wow4j.response.PetStats;
 import ca.wstratto.wow4j.response.Quest;
 import ca.wstratto.wow4j.response.RealmLeaderboard;
+import ca.wstratto.wow4j.response.RealmStatus;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +31,8 @@ public enum RequestType {
     PET_ABILITY("wow/pet/ability/<id>", PetAbility.class, RequestParams.ID),
     PET_STATS("wow/pet/stats/<id>", PetStats.class, RequestParams.ID),
     LEADERBOARD("wow/leaderboard/<bracket>", Leaderboard.class, RequestParams.BRACKET),
-    QUEST("wow/quest/<id>", Quest.class, RequestParams.ID);
+    QUEST("wow/quest/<id>", Quest.class, RequestParams.ID),
+    REALM_STATUS("wow/realm/status", RealmStatus.class);
 
     private String dir;
     private Class responseType;
