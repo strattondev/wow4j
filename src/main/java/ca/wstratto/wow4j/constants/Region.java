@@ -2,7 +2,9 @@ package ca.wstratto.wow4j.constants;
 
 public enum Region {
     US("us"),
-    EU("eu");
+    EU("eu"),
+    KR("kr"),
+    TW("tw");
 
     private String region;
 
