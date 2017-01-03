@@ -7,10 +7,12 @@ import com.google.gson.Gson;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.apache.commons.lang3.StringUtils;
 import org.stringtemplate.v4.ST;
 
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Connection {
@@ -49,7 +51,7 @@ public class Connection {
         return CONNECTION_INSTANCES.size();
     }
 
-    public synchronized <T extends AbstractResponse> T getRequestData(Request request) throws Exception {
+    public synchronized <T extends AbstractResponse> T getRequestData(Request request) throws UnirestException, UnsupportedEncodingException {
         String url = getRequestUrl(request);
         return gson.fromJson(new InputStreamReader(Unirest.get(url).asBinary().getBody(), "UTF-8"),
                 (Class<T>) request.getRequestType().getResponseType());
