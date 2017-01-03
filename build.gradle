@@ -17,3 +17,15 @@ dependencies {
     compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
+
+jar {
+    manifest {
+    }
+}
+
+task fatJar(type: Jar) {
+    baseName = project.name + '-all'
+    destinationDir = file("$rootDir/jars")
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
