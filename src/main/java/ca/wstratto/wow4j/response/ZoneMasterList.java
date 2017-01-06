@@ -2,7 +2,7 @@ package ca.wstratto.wow4j.response;
 
 import java.util.List;
 
-public class Zone extends AbstractResponse {
+public class ZoneMasterList extends AbstractResponse {
     private List<ca.wstratto.wow4j.domain.zone.Zone> zones;
 
     public List<ca.wstratto.wow4j.domain.zone.Zone> getZones() {

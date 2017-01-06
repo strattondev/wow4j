@@ -1,13 +1,28 @@
 group 'ca.wstratto'
 version '0.1.12'
 
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3"
+    }
+}
+
+apply plugin: "com.jfrog.bintray"
 apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: "maven-publish"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -28,4 +43,61 @@ task fatJar(type: Jar) {
     destinationDir = file("$rootDir/jars")
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier "sources"
+}
+
+bintray {
+    user = BINTRAY_USER
+    key = BINTRAY_API_KEY
+    publications = ['bintrayPublish']
+    publish = true
+    pkg {
+        repo = 'maven'
+        name = 'wow4j'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/strattonw/wow4j.git'
+        websiteUrl = 'https://github.com/strattonw/wow4j'
+        issueTrackerUrl = 'https://github.com/strattonw/wow4j/issues'
+        version {
+            name = project.getVersion()
+        }
+    }
+}
+
+def pomConfig = {
+    licenses {
+        license {
+            name "MIT License"
+            url "http://www.opensource.org/licenses/mit-license.php"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            name "Wesley Stratton"
+            email "stratton.wesley@gmail.com"
+        }
+    }
+}
+
+publishing {
+    publications {
+        bintrayPublish(MavenPublication) {
+            from components.java
+            artifact sourceJar
+            groupId 'ca.wstratto'
+            artifactId 'wow4j'
+            version project.getVersion()
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('name', 'wow4j')
+                root.appendNode('url', 'https://github.com/strattonw/wow4j')
+                root.children().last() + pomConfig
+            }
+        }
+    }
 }
