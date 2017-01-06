@@ -2,8 +2,11 @@ package ca.wstratto.wow4j;
 
 import ca.wstratto.wow4j.constants.Locale;
 import ca.wstratto.wow4j.constants.Region;
+import ca.wstratto.wow4j.gson.deserializer.ZoneDeserializer;
 import ca.wstratto.wow4j.response.AbstractResponse;
+import ca.wstratto.wow4j.response.Zone;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -18,10 +21,16 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Connection {
     private static final String API_BASE_URL = "https://<region>.api.battle.net/";
     private static final ConcurrentHashMap<String, Connection> CONNECTION_INSTANCES = new ConcurrentHashMap<>();
-    private final Gson gson = new Gson();
+    private static final GsonBuilder gsonBuilder = new GsonBuilder();
+    private static final Gson gson;
     private final String apiKey;
     private final Region region;
     private final Locale locale;
+
+    static {
+        gsonBuilder.registerTypeAdapter(Zone.class, new ZoneDeserializer());
+        gson = gsonBuilder.create();
+    }
 
     private Connection(String apiKey, Region region, Locale locale) {
         this.apiKey = apiKey;
