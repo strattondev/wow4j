@@ -2,8 +2,10 @@ package ca.wstratto.wow4j;
 
 import ca.wstratto.wow4j.constants.Locale;
 import ca.wstratto.wow4j.constants.Region;
+import ca.wstratto.wow4j.gson.deserializer.AchievementDeserializer;
 import ca.wstratto.wow4j.gson.deserializer.ZoneDeserializer;
 import ca.wstratto.wow4j.response.AbstractResponse;
+import ca.wstratto.wow4j.response.Achievement;
 import ca.wstratto.wow4j.response.Zone;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,6 +31,7 @@ public class Connection {
 
     static {
         gsonBuilder.registerTypeAdapter(Zone.class, new ZoneDeserializer());
+        gsonBuilder.registerTypeAdapter(Achievement.class, new AchievementDeserializer());
         gson = gsonBuilder.create();
     }
 
