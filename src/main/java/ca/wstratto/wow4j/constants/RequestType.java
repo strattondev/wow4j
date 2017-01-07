@@ -18,6 +18,9 @@ import ca.wstratto.wow4j.response.Recipe;
 import ca.wstratto.wow4j.response.Spell;
 import ca.wstratto.wow4j.response.Zone;
 import ca.wstratto.wow4j.response.ZoneMasterList;
+import ca.wstratto.wow4j.response.data.Battlegroups;
+import ca.wstratto.wow4j.response.data.character.Classes;
+import ca.wstratto.wow4j.response.data.character.Races;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +43,10 @@ public enum RequestType {
     RECIPE("wow/recipe/<id>", Recipe.class, RequestParams.ID),
     SPELL("wow/spell/<id>", Spell.class, RequestParams.ID),
     ZONE_MASTER_LIST("wow/zone/", ZoneMasterList.class),
-    ZONE("wow/zone/<id>", Zone.class, RequestParams.ID);
+    ZONE("wow/zone/<id>", Zone.class, RequestParams.ID),
+    DATA_BATTLEGROUPS("wow/data/battlegroups/", Battlegroups.class),
+    DATA_RACES("wow/data/character/races/", Races.class),
+    DATA_CLASSES("wow/data/character/classes/", Classes.class);
 
     private String dir;
     private Class responseType;
