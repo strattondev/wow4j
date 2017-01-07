@@ -18,6 +18,13 @@ import ca.wstratto.wow4j.response.Recipe;
 import ca.wstratto.wow4j.response.Spell;
 import ca.wstratto.wow4j.response.Zone;
 import ca.wstratto.wow4j.response.ZoneMasterList;
+import ca.wstratto.wow4j.response.data.Battlegroups;
+import ca.wstratto.wow4j.response.data.PetTypes;
+import ca.wstratto.wow4j.response.data.Talents;
+import ca.wstratto.wow4j.response.data.character.Classes;
+import ca.wstratto.wow4j.response.data.character.Races;
+import ca.wstratto.wow4j.response.data.guild.Perks;
+import ca.wstratto.wow4j.response.data.guild.Rewards;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +47,17 @@ public enum RequestType {
     RECIPE("wow/recipe/<id>", Recipe.class, RequestParams.ID),
     SPELL("wow/spell/<id>", Spell.class, RequestParams.ID),
     ZONE_MASTER_LIST("wow/zone/", ZoneMasterList.class),
-    ZONE("wow/zone/<id>", Zone.class, RequestParams.ID);
+    ZONE("wow/zone/<id>", Zone.class, RequestParams.ID),
+    DATA_BATTLEGROUPS("wow/data/battlegroups", Battlegroups.class),
+    DATA_CHARACTER_RACES("wow/data/character/races", Races.class),
+    DATA_CHARACTER_CLASSES("wow/data/character/classes", Classes.class),
+    DATA_CHARACTER_ACHIEVEMENTS("wow/data/character/achievements", ca.wstratto.wow4j.response.data.character.Achievements.class),
+    DATA_GUILD_REWARDS("wow/data/guild/rewards", Rewards.class),
+    DATA_GUILD_PERKS("wow/data/guild/perks", Perks.class),
+    DATA_GUILD_ACHIEVEMENTS("wow/data/guild/achievements", ca.wstratto.wow4j.response.data.guild.Achievements.class),
+    DATA_ITEM_CLASSES("wow/data/item/classes", ca.wstratto.wow4j.response.data.item.Classes.class),
+    DATA_TALENTS("wow/data/talents", Talents.class),
+    DATA_PET_TYPES("wow/data/pet/types", PetTypes.class);
 
     private String dir;
     private Class responseType;

@@ -2,15 +2,21 @@ package ca.wstratto.wow4j;
 
 import ca.wstratto.wow4j.constants.Locale;
 import ca.wstratto.wow4j.constants.Region;
+import ca.wstratto.wow4j.domain.data.Talent;
+import ca.wstratto.wow4j.domain.data.talent.Column;
+import ca.wstratto.wow4j.domain.data.talent.Tree;
 import ca.wstratto.wow4j.gson.deserializer.AchievementDeserializer;
 import ca.wstratto.wow4j.gson.deserializer.ZoneDeserializer;
+import ca.wstratto.wow4j.gson.deserializer.data.ColumnDeserializer;
+import ca.wstratto.wow4j.gson.deserializer.data.TalentDeserializer;
+import ca.wstratto.wow4j.gson.deserializer.data.TalentsDeserializer;
+import ca.wstratto.wow4j.gson.deserializer.data.TreeDeserializer;
 import ca.wstratto.wow4j.response.AbstractResponse;
 import ca.wstratto.wow4j.response.Achievement;
 import ca.wstratto.wow4j.response.Zone;
+import ca.wstratto.wow4j.response.data.Talents;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.apache.commons.lang3.StringUtils;
@@ -23,16 +29,22 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Connection {
     private static final String API_BASE_URL = "https://<region>.api.battle.net/";
     private static final ConcurrentHashMap<String, Connection> CONNECTION_INSTANCES = new ConcurrentHashMap<>();
-    private static final GsonBuilder gsonBuilder = new GsonBuilder();
-    private static final Gson gson;
+    private static final GsonBuilder GSON_BUILDER = new GsonBuilder();
+
+    public static final Gson GSON;
+
     private final String apiKey;
     private final Region region;
     private final Locale locale;
 
     static {
-        gsonBuilder.registerTypeAdapter(Zone.class, new ZoneDeserializer());
-        gsonBuilder.registerTypeAdapter(Achievement.class, new AchievementDeserializer());
-        gson = gsonBuilder.create();
+        GSON_BUILDER.registerTypeAdapter(Zone.class, new ZoneDeserializer());
+        GSON_BUILDER.registerTypeAdapter(Achievement.class, new AchievementDeserializer());
+        GSON_BUILDER.registerTypeAdapter(Talents.class, new TalentsDeserializer());
+        GSON_BUILDER.registerTypeAdapter(Talent.class, new TalentDeserializer());
+        GSON_BUILDER.registerTypeAdapter(Tree.class, new TreeDeserializer());
+        GSON_BUILDER.registerTypeAdapter(Column.class, new ColumnDeserializer());
+        GSON = GSON_BUILDER.create();
     }
 
     private Connection(String apiKey, Region region, Locale locale) {
@@ -65,7 +77,7 @@ public class Connection {
 
     public synchronized <T extends AbstractResponse> T getRequestData(Request request) throws UnirestException, UnsupportedEncodingException {
         String url = getRequestUrl(request);
-        return gson.fromJson(new InputStreamReader(Unirest.get(url).asBinary().getBody(), "UTF-8"),
+        return GSON.fromJson(new InputStreamReader(Unirest.get(url).asBinary().getBody(), "UTF-8"),
                 (Class<T>) request.getRequestType().getResponseType());
     }
 
