@@ -1,4 +1,4 @@
-wow4j (0.1.12)
+wow4j (0.1.16)
 =========
 
 A BattleNet Java wrapper for WoW Community APIs
